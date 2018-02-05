@@ -46,7 +46,7 @@ Just install modules
 npm install
 ```
 
-## Running the tests
+## Running server
 
 Start server now !
 
