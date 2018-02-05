@@ -1,0 +1,35 @@
+<% include ./layout %>
+
+<div class="container">
+    <h1>Modifier le contact : <%= nom %>, <%= prenom %></h1>
+    <form method="post" action="/users/edit">
+      <div class="form-group">
+        <label for="nom">Nom de famille</label>
+        <input type="input" value="<%= nom %>" name="nom" class="form-control" id="nom" placeholder="Votre nom de famille">
+      </div>
+      <div class="form-group">
+        <label for="prenom">Prénom</label>
+        <input type="input" value="<%= prenom %>" name="prenom" class="form-control" id="prenom" placeholder="Votre prénom">
+      </div>
+
+      <div class="form-group">
+        <label for="rue">Rue</label>
+        <input type="input" value="<%= rue %>" name="rue" class="form-control" id="rue" placeholder="Rue">
+      </div>
+      <div class="form-group">
+        <label for="cp">Code Postal</label>
+        <input type="input" value="<%= cp %>" name="cp" class="form-control" id="cp" placeholder="Code Postal">
+      </div>
+      <div class="form-group">
+        <label for="ville">Ville</label>
+        <input type="input" value="<%= ville %>" name="ville" class="form-control" id="ville" placeholder="Ville">
+      </div>
+      <input type="hidden" value="<%= id %>" name="id" id="id">
+      <button type="submit" class="btn btn-primary disabled">Modifier</button>
+    </form>
+
+    <div class="center">
+        <a href="/users/delete/<%= id %>" class="btn btn-primary">Supprimer</a>
+    </div>
+
+</div>

@@ -1,0 +1,29 @@
+<% include ./layout %>
+
+<div class="container">
+    <h1>Ajouter un contact</h1>
+    <form method="post" action="/ajout">
+      <div class="form-group">
+        <label for="nom">Nom de famille</label>
+        <input type="input" name="nom" class="form-control" id="nom" placeholder="Votre nom de famille">
+      </div>
+      <div class="form-group">
+        <label for="prenom">Prénom</label>
+        <input type="input" name="prenom" class="form-control" id="prenom" placeholder="Votre prénom">
+      </div>
+
+      <div class="form-group">
+        <label for="rue">Rue</label>
+        <input type="input" name="rue" class="form-control" id="rue" placeholder="Rue">
+      </div>
+      <div class="form-group">
+        <label for="cp">Code Postal</label>
+        <input type="input" name="cp" class="form-control" id="cp" placeholder="Code Postal">
+      </div>
+      <div class="form-group">
+        <label for="ville">Ville</label>
+        <input type="input" name="ville" class="form-control" id="ville" placeholder="Ville">
+      </div>
+      <button type="submit" class="btn btn-primary disabled">Creer</button>
+    </form>
+</div>

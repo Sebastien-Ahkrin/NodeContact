@@ -1,0 +1,23 @@
+<% include ./layout %>
+
+<div class="container">
+    <h1>Mes contacts</h1>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Nom</th>
+          <th scope="col">Prénom</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% users.forEach((user) => { %>
+            <tr>
+              <td><%= user.nom %></td>
+              <td><%= user.prenom %></td>
+              <td><a href="/users/edit/<%= user.id %>">Action</a></td>
+            </tr>
+        <% }); %>
+      </tbody>
+    </table>
+</div>
