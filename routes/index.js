@@ -1,5 +1,7 @@
 const contact = require("../models/contact");
 
+const User = require('../objects/User')
+
 var express = require('express');
 var router = express.Router();
 
