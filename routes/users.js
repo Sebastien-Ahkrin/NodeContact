@@ -1,28 +1,38 @@
-const contact = require("../models/contact");
+import * as contact from "../models/contact";
 
-var express = require('express');
-var router = express.Router();
+import express from 'express';
+const router = express.Router();
+
+export default router;
 
 /* GET users listing. */
-router.get('/edit/:id', async (request, response) => {
+router.get('/edit/:id', (request, response) => {
 
-    let user = null;
+    contact.getUser(request.params.id).then(
+        user => {
+            response.render('edit', user);
+        }
+    );
 
-    try{
-        user = await contact.getUser(request.params.id);
-    }catch(error){
-        throw error;
-    }
-
-    response.render('edit', user[0]);
 });
 
-router.get("/delete/:id", async (request, response) => {
+/*
+contact.getUser(1).then(user => {
+    console.log(user);
+});
+*/
 
-    contact.deleteUser(request.params.id)
-        .then(result => {
-            response.redirect('/');
-        }).catch(error => { throw error; });
+router.get("/delete/:id", (request, response) => {
+
+    contact.getUser(request.params.id).then(
+        user => {
+            user.delete().then(
+                _ => {
+                    response.redirect("/");
+                }
+            );
+        }
+    );
 
 });
 
@@ -35,5 +45,3 @@ router.post('/edit', (request, response) => {
         ville: request.body.ville
     }).then(result => response.redirect('/')).catch(error => { throw error; });
 });
-
-module.exports = router;

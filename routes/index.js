@@ -1,23 +1,23 @@
-const contact = require("../models/contact");
-const User = require('../objects/User')
+import * as contact from "../models/contact";
+import User from '../objects/User';
 
-var express = require('express');
-var router = express.Router();
+import express from 'express';
+const router = express.Router();
 
-router.get('/', async (request, response, next) => {
+export default router;
 
-    let users = null;
+router.get('/test', (req, res) => {
+    const u = new User();
+    u.insert();
+    console.log(contact);
+});
 
-    try{
-        users = await contact.getUsers();
-    }catch(error){
-        throw error;
-    }
-
-    response.render('contact', {
-        users: users
-    });
-
+router.get('/', (request, response, next) => {
+    contact.getUsers().then(users =>
+        response.render('contact', {
+            users
+        })
+    );
 });
 
 router.get('/ajout', (request, response, next) => {
@@ -25,14 +25,12 @@ router.get('/ajout', (request, response, next) => {
 });
 
 router.post('/ajout', (request, response) => {
-    let user = new User(
+    const user = new User(
         request.body.nom,
         request.body.prenom,
         request.body.rue,
         request.body.cp,
         request.body.ville
     );
-    user.insert().then(result => response.redirect('/'))
+    user.insert().then(_ => response.redirect('/'))
 });
-
-module.exports = router;

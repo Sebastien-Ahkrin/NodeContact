@@ -1,9 +1,11 @@
 const bodyParser = require('body-parser');
 
-var app = require('../app');
-
 var debug = require('debug')('nodecontact:server');
 var http = require('http');
+
+require = require("@std/esm")(module, { esm: "js", cjs: true });
+
+const app = require('../app').default;
 
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);

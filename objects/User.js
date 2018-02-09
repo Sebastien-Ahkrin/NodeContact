@@ -1,23 +1,28 @@
-const contact = require("../models/contact");
+import { insertUser, updateUser, deleteUser } from "../models/contact";
 
-module.exports = class User {
+export default class User {
 
-    constructor(nom, prenom, rue, cp, ville) {
+    constructor(nom, prenom, rue, cp, ville, id) {
         this.nom = nom;
         this.prenom = prenom;
         this.rue = rue;
         this.cp = cp;
         this.ville = ville;
+        this.id = id;
     }
 
     insert(){
-        return contact.insertUser(this).then(result => {
+        return insertUser(this).then(result => {
             this.id = result.insertId;
         });
     }
 
     save(){
-        return contact.updateUser(this.id, this);
+        return updateUser(this.id, this);
+    }
+
+    delete(){
+        return deleteUser(this.id);
     }
 
 }
