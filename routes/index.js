@@ -1,5 +1,4 @@
 const contact = require("../models/contact");
-
 const User = require('../objects/User')
 
 var express = require('express');
@@ -26,13 +25,14 @@ router.get('/ajout', (request, response, next) => {
 });
 
 router.post('/ajout', (request, response) => {
-    contact.insertUser({
-        nom: request.body.nom,
-        prenom: request.body.prenom,
-        rue: request.body.rue,
-        cp: request.body.cp,
-        ville: request.body.ville
-    }).then(result => response.redirect('/')).catch(error => { throw error; });
+    let user = new User(
+        request.body.nom,
+        request.body.prenom,
+        request.body.rue,
+        request.body.cp,
+        request.body.ville
+    );
+    user.insert().then(result => response.redirect('/'))
 });
 
 module.exports = router;
