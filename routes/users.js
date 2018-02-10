@@ -1,11 +1,12 @@
 import * as contact from "../models/contact";
 
+import User from '../objects/User';
+
 import express from 'express';
 const router = express.Router();
 
 export default router;
 
-/* GET users listing. */
 router.get('/edit/:id', (request, response) => {
 
     contact.getUser(request.params.id).then(
@@ -15,12 +16,6 @@ router.get('/edit/:id', (request, response) => {
     );
 
 });
-
-/*
-contact.getUser(1).then(user => {
-    console.log(user);
-});
-*/
 
 router.get("/delete/:id", (request, response) => {
 
@@ -37,11 +32,17 @@ router.get("/delete/:id", (request, response) => {
 });
 
 router.post('/edit', (request, response) => {
-    contact.updateUser(request.body.id, {
-        nom: request.body.nom,
-        prenom: request.body.prenom,
-        rue: request.body.rue,
-        cp: request.body.cp,
-        ville: request.body.ville
-    }).then(result => response.redirect('/')).catch(error => { throw error; });
+
+    const u = contact.getUser(request.body.id).then(
+        user => {
+            user.nom = request.body.nom;
+            user.rue = request.body.rue;
+            user.prenom = request.body.prenom;
+            user.cp = request.body.cp;
+            user.ville = request.body.ville;
+
+            user.save().then(_ => response.redirect('/'));
+        }
+    );
+
 });
